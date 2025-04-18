@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Colorful Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    .calculator {
+      width: 320px;
+      border-radius: 15px;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .display {
+      height: 60px;
+      background: #111;
+      color: white;
+      font-size: 2em;
+      padding: 10px;
+      text-align: right;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      padding: 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .red { background: #ff7f7f; }
+    .green { background: #7fff90; }
+    .yellow { background: #ffe47f; }
+    .cyan { background: #7fffd4; }
+    .purple { background: #dda0dd; }
+    .orange { background: #ffb347; }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div id="display" class="display">0</div>
+  <div class="buttons">
+    <!-- Numbers and operations -->
+    <button class="red">7</button>
+    <button class="red">8</button>
+    <button class="red">9</button>
+    <button class="green">/</button>
+
+    <button class="red">4</button>
+    <button class="red">5</button>
+    <button class="red">6</button>
+    <button class="green">x</button>
+
+    <button class="red">1</button>
+    <button class="red">2</button>
+    <button class="red">3</button>
+    <button class="yellow">+</button>
+
+    <button class="red">C</button>
+    <button class="red">0</button>
+    <button class="yellow">=</button>
+    <button class="yellow">-</button>
+
+    <!-- Memory and special functions -->
+    <button class="cyan">M+</button>
+    <button class="cyan">M-</button>
+    <button class="cyan">MR</button>
+    <button class="orange">MC</button>
+
+    <button class="cyan">sqrt</button>
+    <button class="cyan">%</button>
+    <button class="yellow">+/-</button>
+    <button class="purple">History</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+  const buttons = document.querySelectorAll('button');
+  let memory = 0;
+  let current = '';
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.innerText;
+
+      if (val === 'C') {
+        current = '';
+        display.innerText = '0';
+      } else if (val === '=') {
+        try {
+          current = eval(current.replace('x', '*'));
+          display.innerText = current;
+        } catch {
+          display.innerText = 'Error';
+        }
+      } else if (val === 'M+') {
+        memory = parseFloat(display.innerText) || 0;
+      } else if (val === 'M-') {
+        memory = 0;
+      } else if (val === 'MR') {
+        current += memory;
+        display.innerText = current;
+      } else if (val === 'MC') {
+        memory = 0;
+      } else if (val === 'sqrt') {
+        current = Math.sqrt(parseFloat(display.innerText)).toString();
+        display.innerText = current;
+      } else if (val === '+/-') {
+        if (display.innerText !== '0') {
+          current = (-parseFloat(display.innerText)).toString();
+          display.innerText = current;
+        }
+      } else if (val === '%') {
+        current = (parseFloat(display.innerText) / 100).toString();
+        display.innerText = current;
+      } else if (val === 'History') {
+        alert("History feature is not yet implemented.");
+      } else {
+        current += val;
+        display.innerText = current;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
