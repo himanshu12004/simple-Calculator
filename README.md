@@ -1,6 +1,5 @@
-Colorful Calculator
-
-# Colorful Calculator is an interactive and visually appealing calculator application available in both Java and Web (HTML, CSS, JavaScript) versions. This calculator supports basic arithmetic operations along with advanced functions like square root, sign toggle, and memory functions. Its colorful and user-friendly design makes performing calculations enjoyable and simple.
+# Colorful Calculator
+Colorful Calculator is an interactive and visually appealing calculator application available in both Java and Web (HTML, CSS, JavaScript) versions. This calculator supports basic arithmetic operations along with advanced functions like square root, sign toggle, and memory functions. Its colorful and user-friendly design makes performing calculations enjoyable and simple.
 
 # Features
 Basic Operations: Addition (+), Subtraction (-), Multiplication (×), and Division (/).
